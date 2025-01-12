@@ -1,18 +1,77 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
-    <script src="cordova.js"></script>
-    <script src="components/loader.js"></script>
-    <link rel="stylesheet" href="components/loader.css">
-    <link rel="stylesheet" href="css/style.css">
-    <script>
-    </script>
-</head>
-<body>
-	<br />
-    This is a template for Monaca app.
-</body>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+        <title>ヒマじまん</title>
+        <script src="cordova.js"></script>
+        <script src="components/loader.js"></script>
+        <link rel="stylesheet" href="components/loader.css">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <div id="event_wrap" class="event-wrap hidden">
+            <div class="event-background"></div>
+            <div class="event-section">
+                <div class="event-container">
+                    <div class="event-row">
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="top_wrap" class="top-wrap hidden">
+            <h3 class="top-header">ヒマじまん</h3>
+            <div class="top-info">
+                <p>ごうけいヒマ：<span class="js-total-hima"></span></p>
+                <p>きょうのヒマ：<span class="js-today-hima"></span></p>
+            </div>
+            <div class="start-btn-wrap">
+                <div id="start_btn" class="top-btn">すたーと</div>
+            </div>
+            <div class="start-btn-wrap">
+                <div id="ranking_btn" class="top-btn">ランキング</div>
+            </div>
+        </div>
+        <div id="game_wrap" class="">
+            <div class="game-row">
+                <div>
+                    <div class="close-btn-wrap">
+                        <div id="close_btn" class="close-btn">⇦とっぷ</div>
+                    </div>
+                    <div class="game-info">
+                        <div>
+                            <p>ごうけいヒマ：<span class="js-total-hima"></span></p>
+                            <p>きょうのヒマ：<span class="js-today-hima"></span></p>
+                        </div>
+                    </div>
+                    <div class="fever-wrap">
+                        <p>ヒマフィーバー</p>
+                        <p>
+                            <span id="fever_btn_free" class="fever-btn-free hidden">FREE</span>
+                            <span id="fever_btn_movie" class="fever-btn-movie"></span>
+                        </p>
+                    </div>
+                    <div class="fever-wrap">
+                        <p>ヒマスキップ</p>
+                        <p>
+                            <span id="skip_btn_free" class="fever-btn-free hidden">FREE</span>
+                            <span id="skip_btn_movie" class="fever-btn-movie"></span>
+                        </p>
+                    </div>
+                </div>
+                <div class="game-character">
+                    <p id="character_msg" class="character-msg"></p>
+                    <img id="character_image" class="character-image" src="images/himaneat.png">
+                    <p id="character_name" class="character-name">ヒマニート</p>
+                </div>
+            </div>
+            <div class="hima-btn-wrap" id="hima_btn_wrap">
+                <div id="hima_btn" class="hima-btn">ヒマ</div>
+            </div>
+        </div>
+        <script type="module" src="js/main.js"></script>
+    </body>
 </html>

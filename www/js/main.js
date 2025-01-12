@@ -88,7 +88,7 @@ class Main
                 break;
             }
         }
-        this.character_image.src = `./image/${image}`;
+        this.character_image.src = `images/${image}`;
         this.character_name.textContent = name;
         for (const total_hima of this.total_hima) {
             total_hima.textContent = storage.total_count;
