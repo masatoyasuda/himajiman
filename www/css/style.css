@@ -1,2 +1,206 @@
-/**/
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;  
+}
+
+.top-header {
+    font-size: 2.5em;
+    margin: 20% 0 0;
+    text-align: center;
+}
+
+.top-info {
+    font-size: 2em;
+}
+
+.top-info p {
+    margin: 10px;
+    text-align: center;
+}
+
+.start-btn-wrap {
+    margin-top: 0.3em;
+    font-size: 3em;
+}
+
+.top-btn {
+    display: inline-block;
+    padding: 5px 10px;
+    border: 2px solid #000;
+    margin-bottom: 0.3em;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    background: #fff;
+}
+
+/* ゲーム画面 */
+.game-row {
+    display: flex;
+    justify-content: space-around;
+}
+
+.close-btn-wrap {
+    margin: 1.5em 1em 1em;
+}
+
+.close-btn {
+    background: #fff;
+    display: inline-block;
+    padding: 5px 10px;
+    border: 2px solid #000;
+    font-size: 1em;
+}
+
+.game-info {
+    font-size: 1em;
+}
+
+.game-info  p {
+    margin: 0.3em;
+}
+
+.character-msg {
+    border: 1px solid #000;
+    border-radius: 30px;
+    position: relative;
+    width: 100px;
+    height: 60px;
+    background: #fff;
+    font-size: 16px;
+    padding: 10px;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.character-msg:before {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-left: 1px solid #000;
+    border-bottom: 1px solid #000;
+    background: #fff;
+    transform: rotate(-45deg);
+    top: 68px;
+    left: 50px;
+}
+
+.character-image {
+    width: 100px;
+}
+
+.character-name {
+    font-size: 1em;
+    margin-top: 0;
+}
+
+.fever-wrap {
+    margin: 0.5em;
+    font-size: 14px;
+    font-weight: bold;
+    border: 2px solid #000;
+}
+
+.fever-wrap p {
+    margin: 0;
+    padding: 0.2em;
+    text-align: center;
+}
+
+.fever-btn-free {
+    background: #fff;
+}
+
+.fever-btn-movie {
+    background: #fff;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+}
+
+.fever-btn-movie:before {
+    content: '';
+    display: inline-block;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 20px solid #000;
+}
+
+.hima-btn-wrap {
+    padding-top: 3em;
+    position: relative;
+}
+
+.hima-count-action {
+    position: absolute;
+    left: 50%;
+    top: 4em;
+    opacity: 0;
+    transform: translate(-50%);
+    animation: hima-action 500ms linear;
+}
+
+@keyframes hima-action {
+    0% {
+        top: 3em;
+        opacity: 1;
+    }
+    90% {
+        top: -2em;
+        opacity: 1;
+    }
+    100% {
+        top: -2em;
+        opacity: 0;
+    }
+}
+
+.hima-btn {
+    display: inline-block;
+    border: 2px solid #000;
+    width: 60vw;
+    height: 60vw;
+    line-height: 60vw;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 5em;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    background: #fff;
+}
+
+/* イベント */
+.event-background {
+    background: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.event-section {
+    background: #fff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 600px;
+    height: 70%;
+    z-index: 200;
+}
+
+/* 補助クラス */
+.hidden {
+    display: none;
+}
+
+
+
 
