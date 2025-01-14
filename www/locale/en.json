@@ -1,0 +1,20 @@
+{
+    "locale_name": "en",
+    "main": {
+        "header": "enヒマじまん",
+        "start_btn": "enすたーと",
+        "ranking_btn": "enらんきんぐ",
+        "back_btn": "enとっぷ"
+    },
+    "game": {
+        "total_count": "enごうけいヒマ",
+        "today_count": "enきょうのヒマ",
+        "fever_btn": "enヒマフィーバー",
+        "skip_btn": "enヒマスキップ",
+        "hima_btn": "enヒマ",
+        "character_name": "enヒマニート"
+    },
+    "event": {
+
+    }
+}

@@ -5,9 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
         <title>ヒマじまん</title>
-        <script src="cordova.js"></script>
-        <script src="components/loader.js"></script>
-        <link rel="stylesheet" href="components/loader.css">
+        <!-- <script src="cordova.js"></script> -->
+        <!-- <script src="components/loader.js"></script> -->
+        <!-- <link rel="stylesheet" href="components/loader.css"> -->
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
@@ -23,6 +23,12 @@
             </div>
         </div>
         <div id="top_wrap" class="top-wrap">
+            <div class="language-wrap">
+                <select id="language_select">
+                    <option value="ja">Japanese</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
             <h3 class="top-header">ヒマじまん</h3>
             <div class="top-info">
                 <p>ごうけいヒマ：<span class="js-total-hima"></span></p>
