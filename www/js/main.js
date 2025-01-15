@@ -30,6 +30,9 @@ class Main
             const game_storage = window.common.getStorage('game');
             window.game.gameDataInit(game_storage);
             window.game.viewInfo(false);
+            window.game.setHimaTapEvent();
+            window.game.viewCharacterMessage();
+            this.loop();
         })();
     }
 
@@ -72,6 +75,21 @@ class Main
             window.common.$game_wrap.classList.add('hidden');
             window.common.$top_wrap.classList.remove('hidden');
         });
+    }
+
+    /**
+     * 30秒に一度、ランダム表示のキャラクターメッセージ表示を切り替える
+     * 60秒に一度、スキップ、フィーバーの残回数を計算して表示切り替え
+     */
+    loop()
+    {
+        window.game.checkFeverSkipFree_todayCount();
+        setTimeout(() => {
+            window.game.viewCharacterMessage();
+        }, 30000);
+        setTimeout(() => {
+            this.loop();
+        }, 60000);
     }
 }
 

@@ -125,4 +125,66 @@ export default class Game
             console.log(111, character_event);
         }
     }
+
+    /**
+     * ヒマボタンタップ時のイベント
+     */
+    setHimaTapEvent()
+    {
+        window.common.$hima_btn.addEventListener('click', () => {
+            const add_hima_count = this.fever ? 3:1;
+            this.today_count += add_hima_count;
+            this.total_count += add_hima_count;
+            window.common.setGameStorage();
+            this.viewInfo(true);
+            const hima = document.createElement('div');
+            hima.textContent = `ヒマ +${add_hima_count}`;
+            hima.classList.add('hima-count-action');
+            window.common.$hima_btn_wrap.appendChild(hima);
+            setTimeout(() => {
+                hima.remove();
+            }, 500);
+        });
+    }
+
+    /**
+     * ランダム表示のキャラクターメッセージ表示切り替え
+     */
+    viewCharacterMessage()
+    {
+        const random_msg = Math.floor(Math.random() * this.character_message_list.length);
+        window.common.$character_msg.textContent = this.character_message_list[random_msg];
+    }
+
+    /**
+     * スキップ、フィーバーの残回数を計算して表示切り替えをする
+     */
+    checkFeverSkipFree_todayCount()
+    {
+        const today = window.common.getDatetimeFormat(new Date(), 'YYYY-MM-DD');
+        if (today !== this.today) {
+            this.today = today;
+            this.today_count = 0;
+            this.more_movie_skip_today = 3;
+            this.more_movie_fever_today = 3;
+            this.more_free_skip_today = 1;
+        }
+        const current_time = new Date();
+        const target_time = new Date(this.free_fever_next_at);
+        if (current_time.getTime() > target_time.getTime()) {
+            this.more_free_fever_today = 1;
+            this.free_fever_next_at = this.calkFeverNextAt();
+        }
+        window.common.setGameStorage();
+        if (this.more_free_skip_today > 0) {
+
+        } else if (this.more_movie_skip_today > 0) {
+
+        }
+        if (this.more_free_fever_today > 0) {
+
+        } else if (this.more_movie_fever_today > 0) {
+
+        }
+    }
 }
