@@ -2,69 +2,53 @@ export default class Game
 {
     constructor()
     {
-        this.total_count = 0;
-        this.today_count = 0;
-        this.today = ''
-        this.more_free_skip_today = 1,
-        this.more_movie_skip_today = 3;
-        this.more_free_fever_today = 1;
-        this.more_movie_fever_today = 3;
-        this.free_fever_next_at = '';
         this.character_name_list = [
-            {count: 10000, image: 'himagakusei.png', name: 'ヒマ学生', event: ''},
-            {count: 50000, image: 'himabaito.png', name: 'ヒマバイト', event: ''},
-            {count: 100000, image: 'himakaisyain.png', name: 'ヒマ会社員', event: ''},
-            {count: 300000, image: 'himasyatyou.png', name: 'ヒマ社長', event: ''},
-            {count: 500000, image: 'himasensei.png', name: 'ヒマ先生', event: ''},
-            {count: 800000, image: 'himahakase.png', name: 'ヒマ博士', event: ''},
-            {count: 1000000, image: 'himadaitouryou.png', name: 'ヒマ大統領', event: ''},
-            {count: 1300000, image: 'himatennou.png', name: 'ヒマ天皇', event: ''},
-            {count: 1500000, image: 'himabouzu.png', name: 'ヒマ坊主', event: ''},
-            {count: 1800000, image: 'himasennin.png', name: 'ヒマ仙人', event: ''},
-            {count: 2000000, image: 'himaryuujin.png', name: 'ヒマ竜人', event: ''},
-            {count: 2300000, image: 'himahotoke.png', name: 'ヒマほとけ', event: ''},
-            {count: 2500000, image: 'himakami.png', name: 'ヒマ神', event: ''}
-        ];
-        this.character_message_list = [
-            'ヒマでなにがわるい',
-            'ヒマだっていきているんだ',
-            'ヒマじんだもの',
-            'ヒマこそせいぎ',
-            'はたらいたらまけ',
-            'ヒマにかてるごらくはない',
-            'ヒマ〜〜',
-            'タップタップタップ'
+            {count: 10000, image: 'himagakusei.png', name: 'student', event: ''},
+            {count: 50000, image: 'himabaito.png', name: 'part', event: ''},
+            {count: 100000, image: 'himakaisyain.png', name: 'employee', event: ''},
+            {count: 300000, image: 'himasyatyou.png', name: 'self_employed', event: ''},
+            {count: 500000, image: 'himasensei.png', name: 'teacher', event: ''},
+            {count: 800000, image: 'himahakase.png', name: 'doctor', event: ''},
+            {count: 1000000, image: 'himadaitouryou.png', name: 'president', event: ''},
+            {count: 1300000, image: 'himatennou.png', name: 'emperor', event: ''},
+            {count: 1500000, image: 'himabouzu.png', name: 'monk', event: ''},
+            {count: 1800000, image: 'himasennin.png', name: 'hermit', event: ''},
+            {count: 2000000, image: 'himaryuujin.png', name: 'dragon_sage', event: ''},
+            {count: 2300000, image: 'himahotoke.png', name: 'buddha', event: ''},
+            {count: 2500000, image: 'himakami.png', name: 'god', event: ''}
         ];
     }
 
     /**
      * 初期にストレージにデータがある場合、インスタンスプロパティを更新
      * ストレージデータがない場合はストレージデータを作成
-     * @param {object} storage 
      */
-    gameDataInit(storage)
+    gameDataInit()
     {
-        if (storage) {
-            this.total_count = storage.total_count;
-            this.today_count = storage.today_count;
-            this.today = storage.today;
-            this.more_free_skip_today = storage.more_free_skip_today;
-            this.more_movie_skip_today = storage.more_movie_skip_today;
-            this.more_free_fever_today = storage.more_free_fever_today;
-            this.more_movie_fever_today = storage.more_movie_fever_today;
-            this.free_fever_next_at = storage.free_fever_next_at;
+        const game_data = window.storage.getStorage('game');
+        if (game_data) {
+            window.storage.fever_start_at = game_data.fever_start_at;
+            window.storage.total_count = game_data.total_count;
+            window.storage.today_count = game_data.today_count;
+            window.storage.today = game_data.today;
+            window.storage.more_free_skip = game_data.more_free_skip;
+            window.storage.more_movie_skip = game_data.more_movie_skip;
+            window.storage.more_free_fever = game_data.more_free_fever;
+            window.storage.more_movie_fever = game_data.more_movie_fever;
+            window.storage.free_fever_next_at = game_data.free_fever_next_at;
         } else {
-            this.today = window.common.getDatetimeFormat(new Date(), 'YYYY-MM-DD');
-            this.free_fever_next_at = this.calkFeverNextAt();
-            window.common.setStorage('game', {
-                total_count: this.total_count,
-                today_count: this.today_count,
-                today: this.today,
-                more_free_skip_today: this.more_free_skip_today,
-                more_movie_skip_today: this.more_movie_skip_today,
-                more_free_fever_today: this.more_free_fever_today,
-                more_movie_fever_today: this.more_movie_fever_today,
-                free_fever_next_at: this.free_fever_next_at
+            window.storage.today = window.common.getDatetimeFormat(new Date(), 'YYYY-MM-DD');
+            window.storage.free_fever_next_at = this.calkFeverNextAt();
+            window.storage.setStorage('game', {
+                fever_start_at: window.storage.fever_start_at,
+                total_count: window.storage.total_count,
+                today_count: window.storage.today_count,
+                today: window.storage.today,
+                more_free_skip: window.storage.more_free_skip,
+                more_movie_skip: window.storage.more_movie_skip,
+                more_free_fever: window.storage.more_free_fever,
+                more_movie_fever: window.storage.more_movie_fever,
+                free_fever_next_at: window.storage.free_fever_next_at
             });
         }
     }
@@ -99,28 +83,24 @@ export default class Game
      */
     viewInfo(event_valid)
     {
-        let name = 'ヒマニート';
+        let name = window.locale.user_locale.game.character_name;
         let image = 'himaneat.png';
         let character_event;
         for (const character_name_list of this.character_name_list) {
-            if (this.total_count >= character_name_list.count) {
-                name = character_name_list.name;
+            if (window.storage.total_count >= character_name_list.count) {
+                name = window.locale.user_locale.character_name[character_name_list.name];
                 image = character_name_list.image;
-                if (this.total_count === character_name_list.count) {
+                if (window.storage.total_count === character_name_list.count) {
                     character_event = character_name_list;
                 }
             } else {
                 break;
             }
         }
-        window.common.$character_image.src = `images/${image}`;
-        window.common.$character_name.textContent = name;
-        for (const total_hima of window.common.$total_himas) {
-            total_hima.textContent = this.total_count;
-        }
-        for (const today_hima of window.common.$today_himas) {
-            today_hima.textContent = this.today_count;
-        }
+        document.getElementById('character_img').src = `images/${image}`;
+        document.getElementById('character_name').textContent = name;
+        document.getElementById('total_hima').textContent = window.storage.total_count;
+        document.getElementById('today_hima').textContent = window.storage.today_count;
         if (event_valid && character_event) {
             console.log(111, character_event);
         }
@@ -131,19 +111,51 @@ export default class Game
      */
     setHimaTapEvent()
     {
-        window.common.$hima_btn.addEventListener('click', () => {
-            const add_hima_count = this.fever ? 3:1;
-            this.today_count += add_hima_count;
-            this.total_count += add_hima_count;
-            window.common.setGameStorage();
+        document.getElementById('hima_btn').addEventListener('click', () => {
+            const add_hima_count = this.fever_start_at ? 3:1;
+            window.storage.today_count += add_hima_count;
+            window.storage.total_count += add_hima_count;
+            window.storage.setGameStorage();
             this.viewInfo(true);
             const hima = document.createElement('div');
             hima.textContent = `ヒマ +${add_hima_count}`;
             hima.classList.add('hima-count-action');
-            window.common.$hima_btn_wrap.appendChild(hima);
+            document.getElementById('hima_btn').appendChild(hima);
             setTimeout(() => {
                 hima.remove();
             }, 500);
+        });
+    }
+
+    setHimaSkipEvent()
+    {
+        document.getElementById('skip').addEventListener('click', e => {
+            if (!e.target.classList.contains('disable')) {
+                if (this.more_free_skip > 0) {
+                    window.game_event.himaSkip();
+                    this.more_free_skip -= 1;
+                } else if (this.more_movie_skip > 0) {
+                    window.game_event.himaSkip();
+                    this.more_movie_skip -= 1;
+                }
+                this.checkFeverSkipFree_todayCount();
+            }
+        });
+    }
+
+    setHimaFeverEvent()
+    {
+        document.getElementById('fever').addEventListener('click', e => {
+            if (!e.target.classList.contains('disable')) {
+                if (this.more_free_fever > 0) {
+                    window.game_event.himaFever();
+                    this.more_free_fever -= 1;
+                } else if (this.more_movie_fever > 0) {
+                    window.game_event.himaFever();
+                    this.more_movie_fever -= 1;
+                }
+                this.checkFeverSkipFree_todayCount();
+            }
         });
     }
 
@@ -152,8 +164,8 @@ export default class Game
      */
     viewCharacterMessage()
     {
-        const random_msg = Math.floor(Math.random() * this.character_message_list.length);
-        window.common.$character_msg.textContent = this.character_message_list[random_msg];
+        const random_msg = Math.floor(Math.random() * window.locale.user_locale.character_message.length);
+        document.getElementById('character_msg').textContent = window.locale.user_locale.character_message[random_msg];
     }
 
     /**
@@ -163,28 +175,40 @@ export default class Game
     {
         const today = window.common.getDatetimeFormat(new Date(), 'YYYY-MM-DD');
         if (today !== this.today) {
-            this.today = today;
-            this.today_count = 0;
-            this.more_movie_skip_today = 3;
-            this.more_movie_fever_today = 3;
-            this.more_free_skip_today = 1;
+            window.storage.today = today;
+            window.storage.today_count = 0;
+            window.storage.more_movie_skip = 3;
+            window.storage.more_movie_fever = 3;
+            window.storage.more_free_skip = 1;
         }
         const current_time = new Date();
         const target_time = new Date(this.free_fever_next_at);
         if (current_time.getTime() > target_time.getTime()) {
-            this.more_free_fever_today = 1;
-            this.free_fever_next_at = this.calkFeverNextAt();
+            window.storage.more_free_fever = 1;
+            window.storage.free_fever_next_at = this.calkFeverNextAt();
         }
-        window.common.setGameStorage();
-        if (this.more_free_skip_today > 0) {
-
-        } else if (this.more_movie_skip_today > 0) {
-
+        window.storage.setGameStorage();
+        document.getElementById('skip').classList.remove('disable');
+        document.getElementById('skip_free_btn').classList.add('hidden');
+        document.getElementById('skip_movie_btn').classList.add('hidden');
+        document.getElementById('fever').classList.remove('disable');
+        document.getElementById('fever_free_btn').classList.add('hidden');
+        document.getElementById('fever_movie_btn').classList.add('hidden');
+        if (window.storage.more_free_skip > 0) {
+            document.getElementById('skip_free_btn').classList.remove('hidden');
+        } else if (window.storage.more_movie_skip > 0) {
+            document.getElementById('skip_movie_btn').classList.remove('hidden');
+        } else {
+            document.getElementById('skip').classList.add('disable');
+            document.getElementById('skip_movie_btn').classList.remove('hidden');
         }
-        if (this.more_free_fever_today > 0) {
-
-        } else if (this.more_movie_fever_today > 0) {
-
+        if (window.storage.more_free_fever > 0) {
+            document.getElementById('fever_free_btn').classList.remove('hidden');
+        } else if (window.storage.more_movie_fever > 0) {
+            document.getElementById('fever_movie_btn').classList.remove('hidden');
+        } else {
+            document.getElementById('fever').classList.add('disable');
+            document.getElementById('fever_movie_btn').classList.remove('hidden');
         }
     }
 }

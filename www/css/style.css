@@ -101,7 +101,11 @@ html, body {
     margin: 0.5em;
     font-size: 14px;
     font-weight: bold;
-    border: 2px solid #000;
+    border: 1px solid #000;
+}
+
+.fever-wrap.disable {
+    background: #bbb;
 }
 
 .fever-wrap p {
@@ -201,6 +205,8 @@ html, body {
     display: none;
 }
 
-
+.bold {
+    font-weight: bold;
+}
 
 

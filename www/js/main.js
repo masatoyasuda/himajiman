@@ -1,102 +1,106 @@
 import Common from './common.js';
 import Api from './api.js';
+import Storage from './storage.js';
+import Locale from './locale.js';
 import Game from './game.js';
+import GameEvent from './game_event.js';
 
 class Main
 {
     constructor()
     {
-        this.locale_list = {};
-        this.user_lang = this.localeInit();
-        this.user_locale = {};
+        window.storage.storageInit();
+        this.message_interval;
+        this.fever_skip_interval;
     }
 
     init()
     {
-        (async () => {
-            const locales = await window.api.getAllApi([
-                'locale_ja',
-                'locale_en'
-            ]);
-            for (const locale of locales) {
-                if (locale.error) {
-                    this.errorHandling();
-                } else {
-                    this.locale_list[locale.locale_name] = locale;
-                }
-            }
-            this.user_locale = this.locale_list[this.user_lang];
-            this.setPageChangeBtnEvent();
-            const game_storage = window.common.getStorage('game');
-            window.game.gameDataInit(game_storage);
-            window.game.viewInfo(false);
-            window.game.setHimaTapEvent();
-            window.game.viewCharacterMessage();
-            this.loop();
-        })();
-    }
-
-    /**
-     * 言語設定を返す
-     * @returns string
-     */
-    localeInit()
-    {
-        const storage_main = window.common.getStorage('main');
-        if (storage_main) {
-            return storage_main.lang;
-        }
-        const user_lang = navigator.language || navigator.userLanguage;
-        if (/$ja/.test(user_lang)) {
-            return 'ja';
-        }
-        if (/$en/.test(user_lang)) {
-            return 'en';
-        }
-        return 'ja';
+        window.locale.localeInit();
+        this.setPageChangeEvent();
+        window.game.gameDataInit();
     }
 
     errorHandling(error)
     {
         console.log(error);
-        console.log('エラーが発生しました。再読み込みします。');
+        window.location.reload();
     }
 
     /**
      * トップ画面とゲーム画面を切り替えるボタンのイベント
      */
-    setPageChangeBtnEvent()
+    setPageChangeEvent()
     {
-        window.common.$start_btn.addEventListener('click', () => {
-            window.common.$top_wrap.classList.add('hidden');
-            window.common.$game_wrap.classList.remove('hidden');
+        document.addEventListener('postpush', e => {
+            const page = e.enterPage.id;
+            if (page === 'game_page') {
+                // ゲームページに遷移時に発動
+                window.locale.changeLocale('game');
+                this.setGamePageEvent();
+            }
         });
-        window.common.$close_btn.addEventListener('click', () => {
-            window.common.$game_wrap.classList.add('hidden');
-            window.common.$top_wrap.classList.remove('hidden');
+        document.addEventListener('prepop', e => {
+            if (this.fever_skip_interval) {
+                clearInterval(this.message_interval);
+                clearInterval(this.fever_skip_interval);
+            }
         });
+        window.common.$app_navigator.pushPage('top.html').then(() => {
+            this.setTopPageEvent();
+        });
+    }
+
+    setTopPageEvent()
+    {
+        window.locale.changeLocale('top');
+        document.getElementById('start_btn').addEventListener('click', () => {
+            window.common.$app_navigator.pushPage('game.html');
+        });
+        document.getElementById('language_select').value = window.locale.user_lang;
+        document.getElementById('language_select').addEventListener('change', e => {
+            window.locale.user_lang = e.target.value;
+            window.locale.user_locale = window.locale.locale_list[e.target.value];
+            const main_data = window.storage.getStorage('main');
+            main_data.lang = e.target.value;
+            window.storage.setStorage('main', main_data);
+            window.locale.changeLocale('top');
+        });
+    }
+
+    setGamePageEvent()
+    {
+        window.game.viewInfo(false);
+        window.game.setHimaTapEvent();
+        window.game.setHimaSkipEvent();
+        window.game.setHimaFeverEvent();
+        this.gameLoop();
     }
 
     /**
      * 30秒に一度、ランダム表示のキャラクターメッセージ表示を切り替える
      * 60秒に一度、スキップ、フィーバーの残回数を計算して表示切り替え
      */
-    loop()
+    gameLoop()
     {
         window.game.checkFeverSkipFree_todayCount();
-        setTimeout(() => {
+        window.game.viewCharacterMessage();
+        this.message_interval = setInterval(() => {
             window.game.viewCharacterMessage();
-        }, 30000);
-        setTimeout(() => {
-            this.loop();
-        }, 60000);
+        }, 20000);
+        this.fever_skip_interval = setInterval(() => {
+            window.game.checkFeverSkipFree_todayCount();
+        }, 60000)
     }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     window.common = new Common();
     window.api = new Api();
+    window.storage = new Storage();
+    window.locale = new Locale();
     window.game = new Game();
+    window.game_event = new GameEvent();
     window.main = new Main();
     window.main.init();
 });

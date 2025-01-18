@@ -1,20 +1,42 @@
 {
     "locale_name": "en",
-    "main": {
+    "character_message": [
+        "enヒマでなにがわるい",
+        "enヒマだっていきているんだ",
+        "enヒマじんだもの",
+        "enヒマこそせいぎ",
+        "enはたらいたらまけ",
+        "enヒマにかてるごらくはない",
+        "enヒマ〜〜",
+        "enタップタップタップ"
+    ],
+    "character_name": {
+        "student": "enヒマ学生",
+        "part": "enヒマバイト",
+        "employee": "enヒマ会社員",
+        "self_employed": "enヒマ社長",
+        "teacher": "enヒマ先生",
+        "doctor": "enヒマ博士",
+        "president": "enヒマ大統領",
+        "emperor": "enヒマ天皇",
+        "monk": "enヒマ坊主",
+        "hermit": "enヒマ仙人",
+        "dragon_sage": "enヒマ竜人",
+        "buddha": "enヒマほとけ",
+        "god": "enヒマ神"
+    },
+    "top": {
         "header": "enヒマじまん",
-        "start_btn": "enすたーと",
-        "ranking_btn": "enらんきんぐ",
-        "back_btn": "enとっぷ"
+        "start": "enすたーと",
+        "ranking": "enらんきんぐ"
     },
     "game": {
+        "back": "enとっぷにもどる",
         "total_count": "enごうけいヒマ",
         "today_count": "enきょうのヒマ",
-        "fever_btn": "enヒマフィーバー",
-        "skip_btn": "enヒマスキップ",
-        "hima_btn": "enヒマ",
-        "character_name": "enヒマニート"
-    },
-    "event": {
-
+        "fever": "Bored fever",
+        "skip": "Bored skip",
+        "hima": "Bored",
+        "character_name": "Bored NEET"
     }
 }

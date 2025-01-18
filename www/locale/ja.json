@@ -1,20 +1,42 @@
 {
     "locale_name": "ja",
-    "main": {
+    "character_message": [
+        "ヒマでなにがわるい",
+        "ヒマだっていきているんだ",
+        "ヒマじんだもの",
+        "ヒマこそせいぎ",
+        "はたらいたらまけ",
+        "ヒマにかてるごらくはない",
+        "ヒマ〜〜",
+        "タップタップタップ"
+    ],
+    "character_name": {
+        "student": "ヒマ学生",
+        "part": "ヒマバイト",
+        "employee": "ヒマ会社員",
+        "self_employed": "ヒマ社長",
+        "teacher": "ヒマ先生",
+        "doctor": "ヒマ博士",
+        "president": "ヒマ大統領",
+        "emperor": "ヒマ天皇",
+        "monk": "ヒマ坊主",
+        "hermit": "ヒマ仙人",
+        "dragon_sage": "ヒマ竜人",
+        "buddha": "ヒマほとけ",
+        "god": "ヒマ神"
+    },
+    "top": {
         "header": "ヒマじまん",
-        "start_btn": "すたーと",
-        "ranking_btn": "らんきんぐ",
-        "back_btn": "とっぷ"
+        "start": "すたーと",
+        "ranking": "らんきんぐ"
     },
     "game": {
+        "back": "とっぷにもどる",
         "total_count": "ごうけいヒマ",
         "today_count": "きょうのヒマ",
-        "fever_btn": "ヒマフィーバー",
-        "skip_btn": "ヒマスキップ",
-        "hima_btn": "ヒマ",
+        "fever": "ヒマフィーバー",
+        "skip": "ヒマスキップ",
+        "hima": "ヒマ",
         "character_name": "ヒマニート"
-    },
-    "event": {
-
     }
 }
