@@ -7,7 +7,7 @@ import Fever from './fever.js';
 import Skip from './skip.js';
 import Game from './game.js';
 import GameEvent from './game_event.js';
-import UnityAds from './unity_ads.js';
+import Unity from './unity.js';
 
 class Main
 {
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.skip = new Skip();
     window.game = new Game();
     window.game_event = new GameEvent();
-    window.unity_ads = new UnityAds();
+    window.unity = new Unity();
     window.main = new Main();
     window.main.init();
 });

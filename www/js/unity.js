@@ -1,4 +1,4 @@
-class UnityAds
+export default class Unity
 {
     constructor()
     {
