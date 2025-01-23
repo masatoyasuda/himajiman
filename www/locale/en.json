@@ -11,6 +11,7 @@
         "enタップタップタップ"
     ],
     "character_name": {
+        "neat": "enヒマニート",
         "student": "enヒマ学生",
         "part": "enヒマバイト",
         "employee": "enヒマ会社員",
@@ -32,11 +33,10 @@
     },
     "game": {
         "back": "enとっぷにもどる",
-        "total_count": "enごうけいヒマ",
-        "today_count": "enきょうのヒマ",
-        "fever": "Bored fever",
-        "skip": "Bored skip",
-        "hima": "Bored",
-        "character_name": "Bored NEET"
+        "total_count": "enごうけいヒマ：",
+        "today_count": "enきょうのヒマ：",
+        "fever": "Fever 3minutes",
+        "skip": "Skip +500",
+        "hima": "Bored"
     }
 }

@@ -23,6 +23,7 @@ export default class Locale
                 }
             }
             this.user_locale = this.locale_list[this.user_lang];
+            window.page.pageInit(); // 初期ページ表示
         })();
     }
 

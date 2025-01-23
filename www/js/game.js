@@ -2,6 +2,7 @@ export default class Game
 {
     constructor()
     {
+        this.character = 'neat';
         this.character_name_list = [
             {count: 10000, image: 'himagakusei.png', name: 'student', event: ''},
             {count: 50000, image: 'himabaito.png', name: 'part', event: ''},
@@ -20,70 +21,13 @@ export default class Game
     }
 
     /**
-     * 初期にストレージにデータがある場合、インスタンスプロパティを更新
-     * ストレージデータがない場合はストレージデータを作成
-     */
-    gameDataInit()
-    {
-        const game_data = window.storage.getStorage('game');
-        if (game_data) {
-            window.storage.fever_start_at = game_data.fever_start_at;
-            window.storage.total_count = game_data.total_count;
-            window.storage.today_count = game_data.today_count;
-            window.storage.today = game_data.today;
-            window.storage.more_free_skip = game_data.more_free_skip;
-            window.storage.more_movie_skip = game_data.more_movie_skip;
-            window.storage.more_free_fever = game_data.more_free_fever;
-            window.storage.more_movie_fever = game_data.more_movie_fever;
-            window.storage.free_fever_next_at = game_data.free_fever_next_at;
-        } else {
-            window.storage.today = window.common.getDatetimeFormat(new Date(), 'YYYY-MM-DD');
-            window.storage.free_fever_next_at = this.calkFeverNextAt();
-            window.storage.setStorage('game', {
-                fever_start_at: window.storage.fever_start_at,
-                total_count: window.storage.total_count,
-                today_count: window.storage.today_count,
-                today: window.storage.today,
-                more_free_skip: window.storage.more_free_skip,
-                more_movie_skip: window.storage.more_movie_skip,
-                more_free_fever: window.storage.more_free_fever,
-                more_movie_fever: window.storage.more_movie_fever,
-                free_fever_next_at: window.storage.free_fever_next_at
-            });
-        }
-    }
-
-    /**
-     * 現在日時を基に次のフィーバー日時を計算して返す
-     * @returns datetime
-     */
-    calkFeverNextAt()
-    {
-        const current_time = window.common.getDatetimeFormat(new Date(), 'YYYY-MM-DD hh:mm:ss');
-        const datetime = new Date(current_time);
-        datetime.setMinutes(0);
-        datetime.setSeconds(0);
-        const hour = Number(datetime.getHours());
-        if (hour <= 0 && hour < 8) {
-            datetime.setHours(8);
-        } else if (hour <= 8 && hour < 12) {
-            datetime.setHours(12);
-        } else if (hour <= 12 && hour < 18) {
-            datetime.setHours(18);
-        } else {
-            datetime.setHours(24);
-        }
-        return window.common.getDatetimeFormat(datetime, 'YYYY-MM-DD hh:mm:ss');
-    }
-
-    /**
      * ヒマ回数、キャラクター、称号、キャラクター画像を切り替える
      * 一定回数だった場合はイベント発動
      * @param {boolean} event_valid 一定回数だった時にイベントを発動するかどうか。初期化時はfalseにして発動させない。
      */
     viewInfo(event_valid)
     {
-        let name = window.locale.user_locale.game.character_name;
+        let name = window.locale.user_locale.character_name.neat;
         let image = 'himaneat.png';
         let character_event;
         for (const character_name_list of this.character_name_list) {
@@ -98,9 +42,8 @@ export default class Game
             }
         }
         document.getElementById('character_img').src = `images/${image}`;
-        document.getElementById('character_name').textContent = name;
-        document.getElementById('total_hima').textContent = window.storage.total_count;
-        document.getElementById('today_hima').textContent = window.storage.today_count;
+        document.getElementById('total_hima').textContent = window.storage.total_count.toLocaleString('ja-JP');
+        document.getElementById('today_hima').textContent = window.storage.today_count.toLocaleString('ja-JP');
         if (event_valid && character_event) {
             console.log(111, character_event);
         }
@@ -127,88 +70,15 @@ export default class Game
         });
     }
 
-    setHimaSkipEvent()
-    {
-        document.getElementById('skip').addEventListener('click', e => {
-            if (!e.target.classList.contains('disable')) {
-                if (this.more_free_skip > 0) {
-                    window.game_event.himaSkip();
-                    this.more_free_skip -= 1;
-                } else if (this.more_movie_skip > 0) {
-                    window.game_event.himaSkip();
-                    this.more_movie_skip -= 1;
-                }
-                this.checkFeverSkipFree_todayCount();
-            }
-        });
-    }
-
-    setHimaFeverEvent()
-    {
-        document.getElementById('fever').addEventListener('click', e => {
-            if (!e.target.classList.contains('disable')) {
-                if (this.more_free_fever > 0) {
-                    window.game_event.himaFever();
-                    this.more_free_fever -= 1;
-                } else if (this.more_movie_fever > 0) {
-                    window.game_event.himaFever();
-                    this.more_movie_fever -= 1;
-                }
-                this.checkFeverSkipFree_todayCount();
-            }
-        });
-    }
-
     /**
      * ランダム表示のキャラクターメッセージ表示切り替え
      */
     viewCharacterMessage()
     {
         const random_msg = Math.floor(Math.random() * window.locale.user_locale.character_message.length);
-        document.getElementById('character_msg').textContent = window.locale.user_locale.character_message[random_msg];
-    }
-
-    /**
-     * スキップ、フィーバーの残回数を計算して表示切り替えをする
-     */
-    checkFeverSkipFree_todayCount()
-    {
-        const today = window.common.getDatetimeFormat(new Date(), 'YYYY-MM-DD');
-        if (today !== this.today) {
-            window.storage.today = today;
-            window.storage.today_count = 0;
-            window.storage.more_movie_skip = 3;
-            window.storage.more_movie_fever = 3;
-            window.storage.more_free_skip = 1;
-        }
-        const current_time = new Date();
-        const target_time = new Date(this.free_fever_next_at);
-        if (current_time.getTime() > target_time.getTime()) {
-            window.storage.more_free_fever = 1;
-            window.storage.free_fever_next_at = this.calkFeverNextAt();
-        }
-        window.storage.setGameStorage();
-        document.getElementById('skip').classList.remove('disable');
-        document.getElementById('skip_free_btn').classList.add('hidden');
-        document.getElementById('skip_movie_btn').classList.add('hidden');
-        document.getElementById('fever').classList.remove('disable');
-        document.getElementById('fever_free_btn').classList.add('hidden');
-        document.getElementById('fever_movie_btn').classList.add('hidden');
-        if (window.storage.more_free_skip > 0) {
-            document.getElementById('skip_free_btn').classList.remove('hidden');
-        } else if (window.storage.more_movie_skip > 0) {
-            document.getElementById('skip_movie_btn').classList.remove('hidden');
-        } else {
-            document.getElementById('skip').classList.add('disable');
-            document.getElementById('skip_movie_btn').classList.remove('hidden');
-        }
-        if (window.storage.more_free_fever > 0) {
-            document.getElementById('fever_free_btn').classList.remove('hidden');
-        } else if (window.storage.more_movie_fever > 0) {
-            document.getElementById('fever_movie_btn').classList.remove('hidden');
-        } else {
-            document.getElementById('fever').classList.add('disable');
-            document.getElementById('fever_movie_btn').classList.remove('hidden');
-        }
+        document.getElementById('character_msg').innerHTML = `<span>
+            ${window.locale.user_locale.character_name[this.character]}
+        </span><br>
+        ${window.locale.user_locale.character_message[random_msg]}`;
     }
 }

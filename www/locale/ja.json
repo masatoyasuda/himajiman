@@ -11,6 +11,7 @@
         "タップタップタップ"
     ],
     "character_name": {
+        "neat": "ヒマニート",
         "student": "ヒマ学生",
         "part": "ヒマバイト",
         "employee": "ヒマ会社員",
@@ -32,11 +33,10 @@
     },
     "game": {
         "back": "とっぷにもどる",
-        "total_count": "ごうけいヒマ",
-        "today_count": "きょうのヒマ",
-        "fever": "ヒマフィーバー",
-        "skip": "ヒマスキップ",
-        "hima": "ヒマ",
-        "character_name": "ヒマニート"
+        "total_count": "ごうけいヒマ：",
+        "today_count": "きょうのヒマ：",
+        "fever": "Fever 3ぷん",
+        "skip": "Skip +500",
+        "hima": "ヒマ"
     }
 }

@@ -2,9 +2,7 @@ export default class Common
 {
     constructor()
     {
-        this.language_support_list = [/$ja/, /$en/];
-        this.$fever_performance_wrap = document.getElementById('fever_performance_wrap');
-        this.$app_navigator = document.getElementById('app_navigator');
+        this.$fever_flakes = document.getElementById('fever_flakes');
     }
 
     getDatetimeFormat(datetime_obj, format)
