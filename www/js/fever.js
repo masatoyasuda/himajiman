@@ -41,7 +41,7 @@ export default class Fever extends Bonas
                     window.storage.setGameStorage();
                     document.getElementById('fever').classList.add('bonas-disable');
                 } else if (window.storage.more_movie_fever > 0) {
-                    window.unity.rewardAds(this.rewardComplete());
+                    window.unity_ads.rewardAds(this.rewardComplete());
                 } else {
                     return;
                 }
