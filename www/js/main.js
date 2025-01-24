@@ -36,13 +36,13 @@ class Main
      */
     gameLoop()
     {
-        window.fever.checkFeverSkipFree_todayCount();
+        window.fever.checkBonasFree_todayCount();
         window.game.viewCharacterMessage();
         this.message_interval = setInterval(() => {
             window.game.viewCharacterMessage();
         }, 20000);
         this.fever_skip_interval = setInterval(() => {
-            window.fever.checkFeverSkipFree_todayCount();
+            window.fever.checkBonasFree_todayCount();
         }, 60000)
     }
 }

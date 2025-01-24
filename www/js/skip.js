@@ -2,7 +2,7 @@ import Bonas from './bonas.js';
 
 export default class Skip extends Bonas
 {
-    setHimaSkipEvent()
+    setSkipEvent()
     {
         document.getElementById('skip').addEventListener('click', e => {
             if (!e.target.classList.contains('bonas-disable')) {
@@ -13,7 +13,7 @@ export default class Skip extends Bonas
                     this.himaSkip();
                     window.storage.more_movie_skip -= 1;
                 }
-                this.checkFeverSkipFree_todayCount();
+                this.checkBonasFree_todayCount();
             }
         });
     }
@@ -31,5 +31,20 @@ export default class Skip extends Bonas
         setTimeout(() => {
             hima.remove();
         }, 500);
+    }
+
+    changeViewMovieFree()
+    {
+        document.getElementById('skip').classList.remove('bonas-disable');
+        document.getElementById('skip_free_btn').classList.add('hidden');
+        document.getElementById('skip_movie_btn').classList.add('hidden');
+        if (window.storage.more_free_skip > 0) {
+            document.getElementById('skip_free_btn').classList.remove('hidden');
+        } else if (window.storage.more_movie_skip > 0) {
+            document.getElementById('skip_movie_btn').classList.remove('hidden');
+        } else {
+            document.getElementById('skip').classList.add('bonas-disable');
+            document.getElementById('skip_movie_btn').classList.remove('hidden');
+        }
     }
 }

@@ -2,7 +2,7 @@ export default class Storage
 {
     constructor()
     {
-        this.fever_start_at = '';
+        this.fever_end_at = '';
         this.total_count = 0;
         this.today_count = 0;
         this.today = ''
@@ -23,7 +23,7 @@ export default class Storage
         }
         const game_data = this.getStorage('game');
         if (game_data) {
-            this.fever_start_at = game_data.fever_start_at;
+            this.fever_end_at = game_data.fever_end_at;
             this.total_count = game_data.total_count;
             this.today_count = game_data.today_count;
             this.today = game_data.today;
@@ -36,7 +36,7 @@ export default class Storage
             this.today = window.common.getDatetimeFormat(new Date(), 'YYYY-MM-DD');
             this.free_fever_next_at = window.fever.calkFeverNextAt();
             this.setStorage('game', {
-                fever_start_at: this.fever_start_at,
+                fever_end_at: this.fever_end_at,
                 total_count: this.total_count,
                 today_count: this.today_count,
                 today: this.today,
@@ -67,7 +67,7 @@ export default class Storage
     setGameStorage()
     {
         localStorage.setItem('game', JSON.stringify({
-            fever_start_at: this.fever_start_at,
+            fever_end_at: this.fever_end_at,
             total_count: this.total_count,
             today_count: this.today_count,
             today: this.today,

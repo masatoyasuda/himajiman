@@ -55,7 +55,7 @@ export default class Game
     setHimaTapEvent()
     {
         document.getElementById('hima_btn').addEventListener('click', () => {
-            const add_hima_count = this.fever_start_at ? 3:1;
+            const add_hima_count = window.storage.fever_end_at ? 3:1;
             window.storage.today_count += add_hima_count;
             window.storage.total_count += add_hima_count;
             window.storage.setGameStorage();

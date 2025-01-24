@@ -22,9 +22,17 @@ export default class Page
             const page = e.enterPage.id;
             if (page === 'top_page') {
                 // トップページに戻る時に発動
-                if (window.main.fever_skip_interval) {
+                if (window.main.message_interval) {
                     clearInterval(window.main.message_interval);
+                }
+                if (window.main.fever_skip_interval) {
                     clearInterval(window.main.fever_skip_interval);
+                }
+                if (window.fever.fever_interval) {
+                    clearInterval(window.fever.fever_interval);
+                }
+                if (window.fever.fever_animation_interval) {
+                    clearInterval(window.fever.fever_animation_interval);
                 }
             }
         });
@@ -60,7 +68,7 @@ export default class Page
     {
         window.game.viewInfo(false);
         window.game.setHimaTapEvent();
-        window.skip.setHimaSkipEvent();
+        window.skip.setSkipEvent();
         window.fever.setFeverEvent();
         window.main.gameLoop();
     }

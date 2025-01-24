@@ -1,10 +1,5 @@
 export default class Common
 {
-    constructor()
-    {
-        this.$fever_flakes = document.getElementById('fever_flakes');
-    }
-
     getDatetimeFormat(datetime_obj, format)
     {
         const year = datetime_obj.getFullYear();
@@ -35,5 +30,27 @@ export default class Common
         format = format.replace('mm', minutes);
         format = format.replace('ss', seconds);
         return format;
+    }
+
+    timeFormat(time_ms)
+    {
+        const time_s = Math.ceil(time_ms / 1000);
+        let res = '';
+        if (time_s > 59) {
+            const minutes = Math.floor(time_s / 60);
+            const seconds = time_s - (minutes * 60);
+            if (seconds > 9) {
+                res = `0${minutes}:${seconds}`;
+            } else {
+                res = `0${minutes}:0${seconds}`;
+            }
+        } else {
+            if (time_s > 9) {
+                res = `00:${time_s}`;
+            } else {
+                res = `00:0${time_s}`
+            }
+        }
+        return res;
     }
 }

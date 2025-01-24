@@ -71,11 +71,20 @@ body {
 .bonas {
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin: 7px 10px;
+    margin: 7px 10px 20px;
 }
 
 .bonas-fever {
     background: #FB7185;
+    position: relative;
+}
+
+.fever-limit {
+    font-size: 14px;
+    position: absolute;
+    top: 52px;
+    left: 50%;
+    transform: translate(-50%);
 }
 
 .bonas-skip {
@@ -220,34 +229,21 @@ body {
 
 .fever-flake {
     position: absolute;
-    top: -10px;
-    background-color: white;
+    top: -100px;
+    background-color: #fff;
     opacity: 0.8;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    animation: fall 10s linear infinite;
+    width: 10px;
+    height: 10px;
+    animation: fall 5s linear infinite;
 }
 
 @keyframes fall {
     0% {
-        transform: translateY(-10px) rotate(0deg);
+        transform: translateY(-100px) rotate(0deg);
     }
     100% {
-        transform: translateY(100vh) rotate(360deg);
+        transform: translateY(120vh) rotate(360deg);
     }
-}
-
-.fever-flake:nth-child(odd) {
-    animation-duration: 12s;
-    animation-delay: -2s;
-    animation-timing-function: ease-in;
-}
-
-.fever-flake:nth-child(even) {
-    animation-duration: 15s;
-    animation-delay: -5s;
-    animation-timing-function: ease-out;
 }
 
 /* 補助クラス */
