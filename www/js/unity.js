@@ -6,6 +6,7 @@ export default class Unity
             appstore: '5781202',
             android: '5781203'
         };
+        console.log('unity初期化');
         this.adsInit();
     }
 
@@ -14,6 +15,7 @@ export default class Unity
         document.addEventListener('deviceready', () => {
             var gameId = this.game_ids.appstore;
             var testMode = true;
+            console.log('unityAdsセット');
             unityAds.initialize(gameId, testMode, () => {
                 console.log("Unity Ads Initialized");
             });
