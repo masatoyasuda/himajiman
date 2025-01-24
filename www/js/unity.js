@@ -2,6 +2,7 @@ export default class Unity
 {
     constructor()
     {
+        this.unityAdsInitialized = false;
         this.game_ids = {
             appstore: '5781202',
             android: '5781203'
@@ -13,6 +14,7 @@ export default class Unity
     adsInit()
     {
         document.addEventListener('deviceready', () => {
+            console.log('deviceready 発火');
             var gameId = this.game_ids.appstore;
             var testMode = true;
             console.log('unityAdsセット');
