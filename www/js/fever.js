@@ -50,7 +50,7 @@ export default class Fever extends Bonas
                     window.storage.more_free_fever -= 1;
                     this.startFever(true);
                 } else if (window.storage.more_movie_fever > 0) {
-                    window.unity.rewardAds(this.rewardComplete());
+                    window.unity.rewardAds(this.rewardComplete);
                 } else {
                     this.checkBonasFree_todayCount();
                 }

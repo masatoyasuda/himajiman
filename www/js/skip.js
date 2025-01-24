@@ -7,18 +7,24 @@ export default class Skip extends Bonas
         document.getElementById('skip').addEventListener('click', e => {
             if (!e.target.classList.contains('bonas-disable')) {
                 if (window.storage.more_free_skip > 0) {
-                    this.himaSkip();
                     window.storage.more_free_skip -= 1;
+                    this.startSkip();
                 } else if (window.storage.more_movie_skip > 0) {
-                    this.himaSkip();
-                    window.storage.more_movie_skip -= 1;
+                    window.unity.rewardAds(this.rewardComplete);
+                } else {
+                    this.checkBonasFree_todayCount();
                 }
-                this.checkBonasFree_todayCount();
             }
         });
     }
 
-    himaSkip()
+    rewardComplete()
+    {
+        window.storage.more_movie_skip -= 1;
+        this.startSkip();
+    }
+
+    startSkip()
     {
         window.storage.total_count += 500;
         window.storage.today_count += 500;

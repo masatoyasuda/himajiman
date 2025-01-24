@@ -26,7 +26,7 @@ export default class Unity
             UnityAds.show('rewardedVideo', {
                 didFinish: (result) => {
                     if (result === UnityAds.FINISH_STATE.COMPLETED) {
-                        console.log('完了');
+                        console.log('広告閲覧完了');
                         callback();
                     } else {
                         console.log('広告がスキップされました');
